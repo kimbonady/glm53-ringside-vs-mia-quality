@@ -1,0 +1,2830 @@
+{
+  "comparison_scope": "paired-full-system-quality-comparison",
+  "privacy": {
+    "contains_infrastructure_identifiers": false,
+    "contains_private_workload_data": false,
+    "contains_raw_prompts": false,
+    "contains_raw_responses": false
+  },
+  "pure_quantization_isolation": false,
+  "schema": "glm53.quality-ab.public.v2",
+  "source_campaign_date": "2026-09-30",
+  "follow_up": {
+    "campaign_date": "2026-10-01",
+    "scope": "ringside-only-runtime-precision-ablations",
+    "same_system_item_flip_rate_approx": 0.22,
+    "configurations": [
+      {
+        "id": "m0-repeat-1",
+        "composite_gate_correct": 31,
+        "composite_gate_total": 54,
+        "retrieval_sentry_correct": 53,
+        "retrieval_sentry_total": 54,
+        "core_correct": 9,
+        "core_total": 18,
+        "extension_correct": 22,
+        "extension_total": 36
+      },
+      {
+        "id": "m0-repeat-2",
+        "composite_gate_correct": 29,
+        "composite_gate_total": 54,
+        "retrieval_sentry_correct": 54,
+        "retrieval_sentry_total": 54
+      },
+      {
+        "id": "target-kv-bf16",
+        "composite_gate_correct": 25,
+        "composite_gate_total": 54,
+        "retrieval_sentry_correct": 52,
+        "retrieval_sentry_total": 54,
+        "core_correct": 8,
+        "core_total": 18,
+        "extension_correct": 17,
+        "extension_total": 36,
+        "decode_change_pct": -2.3,
+        "cold_prefill_32k_change_pct": -4.5,
+        "cold_prefill_64k_change_pct": -4.6,
+        "decision": "reject"
+      },
+      {
+        "id": "greedy-verification-disabled",
+        "composite_gate_correct": 25,
+        "composite_gate_total": 54,
+        "retrieval_sentry_correct": 50,
+        "retrieval_sentry_total": 54,
+        "c8_per_stream_change_pct": -4.0,
+        "decision": "reject"
+      },
+      {
+        "id": "kda-state-fp32",
+        "composite_gate_correct": 26,
+        "composite_gate_total": 54,
+        "retrieval_sentry_correct": 54,
+        "retrieval_sentry_total": 54,
+        "core_correct": 8,
+        "core_total": 18,
+        "extension_correct": 18,
+        "extension_total": 36,
+        "decode_change_pct": -2.9,
+        "decision": "reject"
+      }
+    ],
+    "soak": {
+      "duration_hours": 2,
+      "requests": 2550,
+      "request_errors": 0,
+      "empty_outputs": 0,
+      "replacement_character_outputs": 0,
+      "transport_losses": 0,
+      "lasting_sentinel_degradation": false
+    },
+    "causal_conclusion": "The tested KV, verification, and KDA-state precision choices did not explain the original paired composite-code signal; checkpoint quantization remains unproven."
+  },
+  "variants": [
+    {
+      "agentic_common": {
+        "n_repetitions": 3,
+        "n_ticket_runs": 24,
+        "outcomes": {
+          "partial": 8,
+          "success": 16
+        },
+        "repetitions": [
+          {
+            "outcomes": {
+              "partial": 1,
+              "success": 7
+            },
+            "repetition": 1,
+            "tickets": [
+              {
+                "input_tokens": 5415,
+                "outcome": "success",
+                "output_tokens": 240,
+                "ticket": "repo-map",
+                "verified_success": true,
+                "wall_time_s": 5.396916469006101
+              },
+              {
+                "input_tokens": 14412,
+                "outcome": "success",
+                "output_tokens": 1132,
+                "ticket": "retry-policy",
+                "verified_success": true,
+                "wall_time_s": 18.664943529001903
+              },
+              {
+                "input_tokens": 10007,
+                "outcome": "partial",
+                "output_tokens": 475,
+                "ticket": "route-export",
+                "verified_success": false,
+                "wall_time_s": 10.150829190999502
+              },
+              {
+                "input_tokens": 6175,
+                "outcome": "success",
+                "output_tokens": 604,
+                "ticket": "dedupe-latest",
+                "verified_success": true,
+                "wall_time_s": 9.598691826991853
+              },
+              {
+                "input_tokens": 13330,
+                "outcome": "success",
+                "output_tokens": 1178,
+                "ticket": "safe-relative-path",
+                "verified_success": true,
+                "wall_time_s": 18.626173533994006
+              },
+              {
+                "input_tokens": 5943,
+                "outcome": "success",
+                "output_tokens": 803,
+                "ticket": "webhook-hmac",
+                "verified_success": true,
+                "wall_time_s": 11.516398694991949
+              },
+              {
+                "input_tokens": 6755,
+                "outcome": "success",
+                "output_tokens": 892,
+                "ticket": "config-deep-merge",
+                "verified_success": true,
+                "wall_time_s": 12.66186434199335
+              },
+              {
+                "input_tokens": 9585,
+                "outcome": "success",
+                "output_tokens": 844,
+                "ticket": "batch-recovery",
+                "verified_success": true,
+                "wall_time_s": 13.16881922101311
+              }
+            ]
+          },
+          {
+            "outcomes": {
+              "partial": 4,
+              "success": 4
+            },
+            "repetition": 2,
+            "tickets": [
+              {
+                "input_tokens": 6426,
+                "outcome": "success",
+                "output_tokens": 261,
+                "ticket": "repo-map",
+                "verified_success": true,
+                "wall_time_s": 6.1306199569953606
+              },
+              {
+                "input_tokens": 34901,
+                "outcome": "partial",
+                "output_tokens": 3076,
+                "ticket": "retry-policy",
+                "verified_success": false,
+                "wall_time_s": 38.50088570700609
+              },
+              {
+                "input_tokens": 10031,
+                "outcome": "partial",
+                "output_tokens": 498,
+                "ticket": "route-export",
+                "verified_success": false,
+                "wall_time_s": 10.352797978004673
+              },
+              {
+                "input_tokens": 12624,
+                "outcome": "partial",
+                "output_tokens": 950,
+                "ticket": "dedupe-latest",
+                "verified_success": false,
+                "wall_time_s": 16.07118162700499
+              },
+              {
+                "input_tokens": 6425,
+                "outcome": "partial",
+                "output_tokens": 678,
+                "ticket": "safe-relative-path",
+                "verified_success": false,
+                "wall_time_s": 11.199560824999935
+              },
+              {
+                "input_tokens": 6878,
+                "outcome": "success",
+                "output_tokens": 792,
+                "ticket": "webhook-hmac",
+                "verified_success": true,
+                "wall_time_s": 11.638065216000541
+              },
+              {
+                "input_tokens": 8894,
+                "outcome": "success",
+                "output_tokens": 1084,
+                "ticket": "config-deep-merge",
+                "verified_success": true,
+                "wall_time_s": 15.892420732008759
+              },
+              {
+                "input_tokens": 7730,
+                "outcome": "success",
+                "output_tokens": 792,
+                "ticket": "batch-recovery",
+                "verified_success": true,
+                "wall_time_s": 11.47395773298922
+              }
+            ]
+          },
+          {
+            "outcomes": {
+              "partial": 3,
+              "success": 5
+            },
+            "repetition": 3,
+            "tickets": [
+              {
+                "input_tokens": 7663,
+                "outcome": "success",
+                "output_tokens": 265,
+                "ticket": "repo-map",
+                "verified_success": true,
+                "wall_time_s": 6.876753739998094
+              },
+              {
+                "input_tokens": 12898,
+                "outcome": "partial",
+                "output_tokens": 1126,
+                "ticket": "retry-policy",
+                "verified_success": false,
+                "wall_time_s": 17.683245303996955
+              },
+              {
+                "input_tokens": 8129,
+                "outcome": "partial",
+                "output_tokens": 462,
+                "ticket": "route-export",
+                "verified_success": false,
+                "wall_time_s": 9.3257859479927
+              },
+              {
+                "input_tokens": 12713,
+                "outcome": "success",
+                "output_tokens": 877,
+                "ticket": "dedupe-latest",
+                "verified_success": true,
+                "wall_time_s": 15.062961152012576
+              },
+              {
+                "input_tokens": 18451,
+                "outcome": "success",
+                "output_tokens": 1615,
+                "ticket": "safe-relative-path",
+                "verified_success": true,
+                "wall_time_s": 23.924627650005277
+              },
+              {
+                "input_tokens": 6977,
+                "outcome": "success",
+                "output_tokens": 834,
+                "ticket": "webhook-hmac",
+                "verified_success": true,
+                "wall_time_s": 12.053500619993429
+              },
+              {
+                "input_tokens": 6800,
+                "outcome": "partial",
+                "output_tokens": 929,
+                "ticket": "config-deep-merge",
+                "verified_success": false,
+                "wall_time_s": 12.810464762005722
+              },
+              {
+                "input_tokens": 7776,
+                "outcome": "success",
+                "output_tokens": 815,
+                "ticket": "batch-recovery",
+                "verified_success": true,
+                "wall_time_s": 11.590823770995485
+              }
+            ]
+          }
+        ],
+        "success_rate": 0.6666666666666666,
+        "ticket_counts": {
+          "batch-recovery": {
+            "success": 3
+          },
+          "config-deep-merge": {
+            "partial": 1,
+            "success": 2
+          },
+          "dedupe-latest": {
+            "partial": 1,
+            "success": 2
+          },
+          "repo-map": {
+            "success": 3
+          },
+          "retry-policy": {
+            "partial": 2,
+            "success": 1
+          },
+          "route-export": {
+            "partial": 3
+          },
+          "safe-relative-path": {
+            "partial": 1,
+            "success": 2
+          },
+          "webhook-hmac": {
+            "success": 3
+          }
+        },
+        "wall_time_s_median": 11.845782917996985
+      },
+      "agentic_long": {
+        "n_repetitions": 3,
+        "n_ticket_runs": 6,
+        "outcomes": {
+          "partial": 6
+        },
+        "repetitions": [
+          {
+            "outcomes": {
+              "partial": 2
+            },
+            "repetition": 1,
+            "tickets": [
+              {
+                "input_tokens": 170294,
+                "outcome": "partial",
+                "output_tokens": 6751,
+                "ticket": "reliability-refactor-marathon",
+                "verified_success": false,
+                "wall_time_s": 101.46080698999867
+              },
+              {
+                "input_tokens": 106549,
+                "outcome": "partial",
+                "output_tokens": 5689,
+                "ticket": "security-recovery-marathon",
+                "verified_success": false,
+                "wall_time_s": 82.0369996780064
+              }
+            ]
+          },
+          {
+            "outcomes": {
+              "partial": 2
+            },
+            "repetition": 2,
+            "tickets": [
+              {
+                "input_tokens": 120596,
+                "outcome": "partial",
+                "output_tokens": 3975,
+                "ticket": "reliability-refactor-marathon",
+                "verified_success": false,
+                "wall_time_s": 70.9761144189979
+              },
+              {
+                "input_tokens": 91778,
+                "outcome": "partial",
+                "output_tokens": 5883,
+                "ticket": "security-recovery-marathon",
+                "verified_success": false,
+                "wall_time_s": 83.55781854000816
+              }
+            ]
+          },
+          {
+            "outcomes": {
+              "partial": 2
+            },
+            "repetition": 3,
+            "tickets": [
+              {
+                "input_tokens": 128783,
+                "outcome": "partial",
+                "output_tokens": 3957,
+                "ticket": "reliability-refactor-marathon",
+                "verified_success": false,
+                "wall_time_s": 72.94847924399073
+              },
+              {
+                "input_tokens": 176838,
+                "outcome": "partial",
+                "output_tokens": 6485,
+                "ticket": "security-recovery-marathon",
+                "verified_success": false,
+                "wall_time_s": 100.63244442699943
+              }
+            ]
+          }
+        ],
+        "success_rate": 0.0,
+        "ticket_counts": {
+          "reliability-refactor-marathon": {
+            "partial": 3
+          },
+          "security-recovery-marathon": {
+            "partial": 3
+          }
+        },
+        "wall_time_s_median": 82.79740910900728
+      },
+      "depth": {
+        "by_size": [
+          {
+            "checks_correct": 15,
+            "checks_total": 15,
+            "decode_tps_median": 109.97774644230164,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 3,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 4450.577825147408,
+            "prompt_tokens_max": 8229,
+            "prompt_tokens_median": 8229,
+            "prompt_tokens_min": 8228,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 7127,
+            "ttft_s_median": 1.8489733970054658
+          },
+          {
+            "checks_correct": 13,
+            "checks_total": 15,
+            "decode_tps_median": 111.56976807401993,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 1,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 4774.334669283063,
+            "prompt_tokens_max": 32829,
+            "prompt_tokens_median": 32829,
+            "prompt_tokens_min": 32828,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 26779,
+            "ttft_s_median": 6.876141341999755
+          },
+          {
+            "checks_correct": 14,
+            "checks_total": 15,
+            "decode_tps_median": 103.49551268572209,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 2,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 4832.5931484237,
+            "prompt_tokens_max": 65579,
+            "prompt_tokens_median": 65579,
+            "prompt_tokens_min": 65578,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 52985,
+            "ttft_s_median": 13.570147120990441
+          },
+          {
+            "checks_correct": 12,
+            "checks_total": 15,
+            "decode_tps_median": 103.47650639263192,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 0,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 4825.462225935522,
+            "prompt_tokens_max": 131129,
+            "prompt_tokens_median": 131129,
+            "prompt_tokens_min": 131128,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 105411,
+            "ttft_s_median": 27.17439156299224
+          },
+          {
+            "checks_correct": 13,
+            "checks_total": 15,
+            "decode_tps_median": 107.3527440276634,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 1,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 4770.275248989189,
+            "prompt_tokens_max": 196629,
+            "prompt_tokens_median": 196629,
+            "prompt_tokens_min": 196628,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 157829,
+            "ttft_s_median": 41.21963403299742
+          },
+          {
+            "checks_correct": 12,
+            "checks_total": 15,
+            "decode_tps_median": 114.18309964836808,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 0,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 4713.247182161406,
+            "prompt_tokens_max": 259973,
+            "prompt_tokens_median": 259973,
+            "prompt_tokens_min": 259972,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 208500,
+            "ttft_s_median": 55.15793888000189
+          }
+        ],
+        "seeds": [
+          {
+            "cases": [
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 108.41790802410917,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4397.581942993256,
+                "prompt_tokens": 8229,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 7127,
+                "ttft_s": 1.8712556370010134
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 111.56976807401993,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4705.111622213794,
+                "prompt_tokens": 32829,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 26779,
+                "ttft_s": 6.977305245003663
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 102.06144731976066,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4825.941142912628,
+                "prompt_tokens": 65579,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 52985,
+                "ttft_s": 13.588852009997936
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 103.47650639263192,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4818.494929481552,
+                "prompt_tokens": 131129,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 105411,
+                "ttft_s": 27.21368433900352
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 106.41555362716925,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4770.275248989189,
+                "prompt_tokens": 196629,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 157829,
+                "ttft_s": 41.21963403299742
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 111.67698799031398,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4713.247182161406,
+                "prompt_tokens": 259973,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 208500,
+                "ttft_s": 55.15793888000189
+              }
+            ],
+            "seed": 1
+          },
+          {
+            "cases": [
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 119.8317559235497,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4450.577825147408,
+                "prompt_tokens": 8229,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 7127,
+                "ttft_s": 1.8489733970054658
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 112.84621323276315,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4774.334669283063,
+                "prompt_tokens": 32829,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 26779,
+                "ttft_s": 6.876141341999755
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 116.29177248315807,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4832.5931484237,
+                "prompt_tokens": 65579,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 52985,
+                "ttft_s": 13.570147120990441
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 106.57814905928602,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4825.462225935522,
+                "prompt_tokens": 131129,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 105411,
+                "ttft_s": 27.17439156299224
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 107.40863868472567,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4755.869572426099,
+                "prompt_tokens": 196629,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 157829,
+                "ttft_s": 41.34448958399298
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 127.35453201727229,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4708.836088459743,
+                "prompt_tokens": 259973,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 208500,
+                "ttft_s": 55.20960915100295
+              }
+            ],
+            "seed": 2
+          },
+          {
+            "cases": [
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 109.97774644230164,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4595.627142796361,
+                "prompt_tokens": 8228,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 7127,
+                "ttft_s": 1.7903976420057006
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 107.49095156951736,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4823.805646022113,
+                "prompt_tokens": 32828,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 26779,
+                "ttft_s": 6.8054151450050995
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 103.49551268572209,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4848.964030564446,
+                "prompt_tokens": 65578,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 52985,
+                "ttft_s": 13.524125893003657
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 101.10036403270459,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4834.274799159566,
+                "prompt_tokens": 131128,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 105411,
+                "ttft_s": 27.124647531993105
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 107.3527440276634,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4776.783718640063,
+                "prompt_tokens": 196628,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 157829,
+                "ttft_s": 41.1632620570017
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 114.18309964836808,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 4717.144070980546,
+                "prompt_tokens": 259972,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 208500,
+                "ttft_s": 55.11216025800968
+              }
+            ],
+            "seed": 3
+          }
+        ]
+      },
+      "id": "ringside-nvfp4-tp4",
+      "label": "RiNGSiDE NVFP4 TP4",
+      "tool_eval": {
+        "n": 3,
+        "scenario_counts": {
+          "TC-40": {
+            "pass": 3
+          },
+          "TC-43": {
+            "fail": 3
+          },
+          "TC-51": {
+            "fail": 1,
+            "pass": 2
+          },
+          "TC-52": {
+            "partial": 2,
+            "pass": 1
+          },
+          "TC-53": {
+            "pass": 3
+          },
+          "TC-63": {
+            "pass": 3
+          },
+          "TC-64": {
+            "pass": 3
+          },
+          "TC-68": {
+            "fail": 3
+          }
+        },
+        "score_max": 75,
+        "score_mean": 66.66666666666667,
+        "score_median": 69,
+        "score_min": 56,
+        "scores": [
+          69,
+          56,
+          75
+        ],
+        "trials": [
+          {
+            "scenarios": {
+              "TC-40": "pass",
+              "TC-43": "fail",
+              "TC-51": "pass",
+              "TC-52": "partial",
+              "TC-53": "pass",
+              "TC-63": "pass",
+              "TC-64": "pass",
+              "TC-68": "fail"
+            },
+            "score": 69,
+            "trial": 1
+          },
+          {
+            "scenarios": {
+              "TC-40": "pass",
+              "TC-43": "fail",
+              "TC-51": "fail",
+              "TC-52": "partial",
+              "TC-53": "pass",
+              "TC-63": "pass",
+              "TC-64": "pass",
+              "TC-68": "fail"
+            },
+            "score": 56,
+            "trial": 2
+          },
+          {
+            "scenarios": {
+              "TC-40": "pass",
+              "TC-43": "fail",
+              "TC-51": "pass",
+              "TC-52": "pass",
+              "TC-53": "pass",
+              "TC-63": "pass",
+              "TC-64": "pass",
+              "TC-68": "fail"
+            },
+            "score": 75,
+            "trial": 3
+          }
+        ]
+      }
+    },
+    {
+      "agentic_common": {
+        "n_repetitions": 3,
+        "n_ticket_runs": 24,
+        "outcomes": {
+          "partial": 11,
+          "success": 13
+        },
+        "repetitions": [
+          {
+            "outcomes": {
+              "partial": 4,
+              "success": 4
+            },
+            "repetition": 1,
+            "tickets": [
+              {
+                "input_tokens": 7491,
+                "outcome": "success",
+                "output_tokens": 285,
+                "ticket": "repo-map",
+                "verified_success": true,
+                "wall_time_s": 19.747221858007833
+              },
+              {
+                "input_tokens": 12750,
+                "outcome": "success",
+                "output_tokens": 994,
+                "ticket": "retry-policy",
+                "verified_success": true,
+                "wall_time_s": 41.859373676998075
+              },
+              {
+                "input_tokens": 8161,
+                "outcome": "partial",
+                "output_tokens": 500,
+                "ticket": "route-export",
+                "verified_success": false,
+                "wall_time_s": 23.990433655999368
+              },
+              {
+                "input_tokens": 7544,
+                "outcome": "partial",
+                "output_tokens": 666,
+                "ticket": "dedupe-latest",
+                "verified_success": false,
+                "wall_time_s": 29.062420069996733
+              },
+              {
+                "input_tokens": 26049,
+                "outcome": "success",
+                "output_tokens": 1938,
+                "ticket": "safe-relative-path",
+                "verified_success": true,
+                "wall_time_s": 78.42485080799088
+              },
+              {
+                "input_tokens": 7012,
+                "outcome": "success",
+                "output_tokens": 862,
+                "ticket": "webhook-hmac",
+                "verified_success": true,
+                "wall_time_s": 31.430785474003642
+              },
+              {
+                "input_tokens": 8569,
+                "outcome": "partial",
+                "output_tokens": 1249,
+                "ticket": "config-deep-merge",
+                "verified_success": false,
+                "wall_time_s": 45.91023933599354
+              },
+              {
+                "input_tokens": 7970,
+                "outcome": "partial",
+                "output_tokens": 882,
+                "ticket": "batch-recovery",
+                "verified_success": false,
+                "wall_time_s": 31.03684554398933
+              }
+            ]
+          },
+          {
+            "outcomes": {
+              "partial": 4,
+              "success": 4
+            },
+            "repetition": 2,
+            "tickets": [
+              {
+                "input_tokens": 7589,
+                "outcome": "success",
+                "output_tokens": 290,
+                "ticket": "repo-map",
+                "verified_success": true,
+                "wall_time_s": 20.175585441000294
+              },
+              {
+                "input_tokens": 13555,
+                "outcome": "success",
+                "output_tokens": 1202,
+                "ticket": "retry-policy",
+                "verified_success": true,
+                "wall_time_s": 46.73823812500632
+              },
+              {
+                "input_tokens": 8204,
+                "outcome": "partial",
+                "output_tokens": 530,
+                "ticket": "route-export",
+                "verified_success": false,
+                "wall_time_s": 27.46289675499429
+              },
+              {
+                "input_tokens": 6402,
+                "outcome": "partial",
+                "output_tokens": 730,
+                "ticket": "dedupe-latest",
+                "verified_success": false,
+                "wall_time_s": 28.895194865996018
+              },
+              {
+                "input_tokens": 20368,
+                "outcome": "success",
+                "output_tokens": 1857,
+                "ticket": "safe-relative-path",
+                "verified_success": true,
+                "wall_time_s": 71.19261952200031
+              },
+              {
+                "input_tokens": 12039,
+                "outcome": "success",
+                "output_tokens": 1379,
+                "ticket": "webhook-hmac",
+                "verified_success": true,
+                "wall_time_s": 46.9173922129994
+              },
+              {
+                "input_tokens": 7258,
+                "outcome": "partial",
+                "output_tokens": 1111,
+                "ticket": "config-deep-merge",
+                "verified_success": false,
+                "wall_time_s": 37.122937860985985
+              },
+              {
+                "input_tokens": 8039,
+                "outcome": "partial",
+                "output_tokens": 872,
+                "ticket": "batch-recovery",
+                "verified_success": false,
+                "wall_time_s": 33.1464064509928
+              }
+            ]
+          },
+          {
+            "outcomes": {
+              "partial": 3,
+              "success": 5
+            },
+            "repetition": 3,
+            "tickets": [
+              {
+                "input_tokens": 7589,
+                "outcome": "success",
+                "output_tokens": 267,
+                "ticket": "repo-map",
+                "verified_success": true,
+                "wall_time_s": 17.720079913997324
+              },
+              {
+                "input_tokens": 12753,
+                "outcome": "success",
+                "output_tokens": 1006,
+                "ticket": "retry-policy",
+                "verified_success": true,
+                "wall_time_s": 43.1195232559985
+              },
+              {
+                "input_tokens": 9049,
+                "outcome": "partial",
+                "output_tokens": 471,
+                "ticket": "route-export",
+                "verified_success": false,
+                "wall_time_s": 24.18262971600052
+              },
+              {
+                "input_tokens": 7634,
+                "outcome": "partial",
+                "output_tokens": 705,
+                "ticket": "dedupe-latest",
+                "verified_success": false,
+                "wall_time_s": 29.718172416003654
+              },
+              {
+                "input_tokens": 7646,
+                "outcome": "success",
+                "output_tokens": 724,
+                "ticket": "safe-relative-path",
+                "verified_success": true,
+                "wall_time_s": 33.861872847992345
+              },
+              {
+                "input_tokens": 7016,
+                "outcome": "success",
+                "output_tokens": 863,
+                "ticket": "webhook-hmac",
+                "verified_success": true,
+                "wall_time_s": 32.60149951100175
+              },
+              {
+                "input_tokens": 7895,
+                "outcome": "success",
+                "output_tokens": 1091,
+                "ticket": "config-deep-merge",
+                "verified_success": true,
+                "wall_time_s": 39.47850417300651
+              },
+              {
+                "input_tokens": 8011,
+                "outcome": "partial",
+                "output_tokens": 859,
+                "ticket": "batch-recovery",
+                "verified_success": false,
+                "wall_time_s": 32.10802833500202
+              }
+            ]
+          }
+        ],
+        "success_rate": 0.5416666666666666,
+        "ticket_counts": {
+          "batch-recovery": {
+            "partial": 3
+          },
+          "config-deep-merge": {
+            "partial": 2,
+            "success": 1
+          },
+          "dedupe-latest": {
+            "partial": 3
+          },
+          "repo-map": {
+            "success": 3
+          },
+          "retry-policy": {
+            "success": 3
+          },
+          "route-export": {
+            "partial": 3
+          },
+          "safe-relative-path": {
+            "success": 3
+          },
+          "webhook-hmac": {
+            "success": 3
+          }
+        },
+        "wall_time_s_median": 32.35476392300188
+      },
+      "agentic_long": {
+        "n_repetitions": 3,
+        "n_ticket_runs": 6,
+        "outcomes": {
+          "partial": 6
+        },
+        "repetitions": [
+          {
+            "outcomes": {
+              "partial": 2
+            },
+            "repetition": 1,
+            "tickets": [
+              {
+                "input_tokens": 128003,
+                "outcome": "partial",
+                "output_tokens": 4046,
+                "ticket": "reliability-refactor-marathon",
+                "verified_success": false,
+                "wall_time_s": 196.07324157901166
+              },
+              {
+                "input_tokens": 88177,
+                "outcome": "partial",
+                "output_tokens": 7205,
+                "ticket": "security-recovery-marathon",
+                "verified_success": false,
+                "wall_time_s": 237.61881274801272
+              }
+            ]
+          },
+          {
+            "outcomes": {
+              "partial": 2
+            },
+            "repetition": 2,
+            "tickets": [
+              {
+                "input_tokens": 163212,
+                "outcome": "partial",
+                "output_tokens": 6093,
+                "ticket": "reliability-refactor-marathon",
+                "verified_success": false,
+                "wall_time_s": 258.76018630900944
+              },
+              {
+                "input_tokens": 84419,
+                "outcome": "partial",
+                "output_tokens": 5864,
+                "ticket": "security-recovery-marathon",
+                "verified_success": false,
+                "wall_time_s": 205.08190310599457
+              }
+            ]
+          },
+          {
+            "outcomes": {
+              "partial": 2
+            },
+            "repetition": 3,
+            "tickets": [
+              {
+                "input_tokens": 124261,
+                "outcome": "partial",
+                "output_tokens": 4277,
+                "ticket": "reliability-refactor-marathon",
+                "verified_success": false,
+                "wall_time_s": 195.8179496369994
+              },
+              {
+                "input_tokens": 88514,
+                "outcome": "partial",
+                "output_tokens": 7103,
+                "ticket": "security-recovery-marathon",
+                "verified_success": false,
+                "wall_time_s": 229.8872176950099
+              }
+            ]
+          }
+        ],
+        "success_rate": 0.0,
+        "ticket_counts": {
+          "reliability-refactor-marathon": {
+            "partial": 3
+          },
+          "security-recovery-marathon": {
+            "partial": 3
+          }
+        },
+        "wall_time_s_median": 217.48456040050223
+      },
+      "depth": {
+        "by_size": [
+          {
+            "checks_correct": 14,
+            "checks_total": 15,
+            "decode_tps_median": 55.79703325905326,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 2,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 1454.292736299105,
+            "prompt_tokens_max": 8228,
+            "prompt_tokens_median": 8228,
+            "prompt_tokens_min": 8227,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 7127,
+            "ttft_s_median": 5.657732995998231
+          },
+          {
+            "checks_correct": 15,
+            "checks_total": 15,
+            "decode_tps_median": 49.43066045565491,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 3,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 1549.1249058691976,
+            "prompt_tokens_max": 32828,
+            "prompt_tokens_median": 32828,
+            "prompt_tokens_min": 32827,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 26779,
+            "ttft_s_median": 21.19131896700128
+          },
+          {
+            "checks_correct": 15,
+            "checks_total": 15,
+            "decode_tps_median": 42.65732218779295,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 3,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 1404.797750076366,
+            "prompt_tokens_max": 65578,
+            "prompt_tokens_median": 65578,
+            "prompt_tokens_min": 65577,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 52985,
+            "ttft_s_median": 46.68145289699896
+          },
+          {
+            "checks_correct": 14,
+            "checks_total": 15,
+            "decode_tps_median": 40.189815009263555,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 2,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 1378.536681263649,
+            "prompt_tokens_max": 131128,
+            "prompt_tokens_median": 131128,
+            "prompt_tokens_min": 131127,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 105411,
+            "ttft_s_median": 95.12115403400094
+          },
+          {
+            "checks_correct": 14,
+            "checks_total": 15,
+            "decode_tps_median": 39.08624358955361,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 2,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 1405.3820850487905,
+            "prompt_tokens_max": 196628,
+            "prompt_tokens_median": 196628,
+            "prompt_tokens_min": 196627,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 157829,
+            "ttft_s_median": 139.91070619999664
+          },
+          {
+            "checks_correct": 13,
+            "checks_total": 15,
+            "decode_tps_median": 42.83206330143414,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 1,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 1341.3734716355584,
+            "prompt_tokens_max": 259972,
+            "prompt_tokens_median": 259972,
+            "prompt_tokens_min": 259971,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 208500,
+            "ttft_s_median": 193.81030376499984
+          }
+        ],
+        "seeds": [
+          {
+            "cases": [
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 51.82220555768681,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 423.98073882844216,
+                "prompt_tokens": 8228,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 7127,
+                "ttft_s": 19.40654196399555
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 52.04609811143756,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1549.1249058691976,
+                "prompt_tokens": 32828,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 26779,
+                "ttft_s": 21.19131896700128
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 42.65732218779295,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1527.4761072998056,
+                "prompt_tokens": 65578,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 52985,
+                "ttft_s": 42.932259094988694
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 40.189815009263555,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1578.61324246057,
+                "prompt_tokens": 131128,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 105411,
+                "ttft_s": 83.0653110419953
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 36.30288895736201,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1405.3820850487905,
+                "prompt_tokens": 196628,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 157829,
+                "ttft_s": 139.91070619999664
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 38.73029630311451,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1428.8130879762948,
+                "prompt_tokens": 259972,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 208500,
+                "ttft_s": 181.94962111399218
+              }
+            ],
+            "seed": 1
+          },
+          {
+            "cases": [
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 57.25273495559368,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1454.292736299105,
+                "prompt_tokens": 8228,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 7127,
+                "ttft_s": 5.657732995998231
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 49.43066045565491,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1259.8260835858016,
+                "prompt_tokens": 32828,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 26779,
+                "ttft_s": 26.05756495099922
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 43.31155355159458,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1404.797750076366,
+                "prompt_tokens": 65578,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 52985,
+                "ttft_s": 46.68145289699896
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 40.73435781051163,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1378.536681263649,
+                "prompt_tokens": 131128,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 105411,
+                "ttft_s": 95.12115403400094
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 39.08624358955361,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1420.7788587458097,
+                "prompt_tokens": 196628,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 157829,
+                "ttft_s": 138.39451424099389
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 42.83206330143414,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1341.3734716355584,
+                "prompt_tokens": 259972,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 208500,
+                "ttft_s": 193.81030376499984
+              }
+            ],
+            "seed": 2
+          },
+          {
+            "cases": [
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 55.79703325905326,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1454.7788115003552,
+                "prompt_tokens": 8227,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 7127,
+                "ttft_s": 5.655155227010255
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 31.73509078385152,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1556.9332541905967,
+                "prompt_tokens": 32827,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 26779,
+                "ttft_s": 21.084397749000345
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 42.359182647560246,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1193.9582889301678,
+                "prompt_tokens": 65577,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 52985,
+                "ttft_s": 54.924029262998374
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 38.012385358890235,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1278.640021542787,
+                "prompt_tokens": 131127,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 105411,
+                "ttft_s": 102.55192844799603
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 41.54600279312391,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1249.5076303702674,
+                "prompt_tokens": 196627,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 157829,
+                "ttft_s": 157.36358484000084
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 45.69743423225075,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1256.8004457939635,
+                "prompt_tokens": 259971,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 208500,
+                "ttft_s": 206.8514543180063
+              }
+            ],
+            "seed": 3
+          }
+        ]
+      },
+      "id": "mia-exl3-stock-tp2",
+      "label": "Mia EXL3 stock TP2",
+      "tool_eval": {
+        "n": 3,
+        "scenario_counts": {
+          "TC-40": {
+            "pass": 3
+          },
+          "TC-43": {
+            "fail": 3
+          },
+          "TC-51": {
+            "fail": 2,
+            "pass": 1
+          },
+          "TC-52": {
+            "partial": 3
+          },
+          "TC-53": {
+            "pass": 3
+          },
+          "TC-63": {
+            "pass": 3
+          },
+          "TC-64": {
+            "pass": 3
+          },
+          "TC-68": {
+            "fail": 3
+          }
+        },
+        "score_max": 69,
+        "score_mean": 60.333333333333336,
+        "score_median": 56,
+        "score_min": 56,
+        "scores": [
+          56,
+          69,
+          56
+        ],
+        "trials": [
+          {
+            "scenarios": {
+              "TC-40": "pass",
+              "TC-43": "fail",
+              "TC-51": "fail",
+              "TC-52": "partial",
+              "TC-53": "pass",
+              "TC-63": "pass",
+              "TC-64": "pass",
+              "TC-68": "fail"
+            },
+            "score": 56,
+            "trial": 1
+          },
+          {
+            "scenarios": {
+              "TC-40": "pass",
+              "TC-43": "fail",
+              "TC-51": "pass",
+              "TC-52": "partial",
+              "TC-53": "pass",
+              "TC-63": "pass",
+              "TC-64": "pass",
+              "TC-68": "fail"
+            },
+            "score": 69,
+            "trial": 2
+          },
+          {
+            "scenarios": {
+              "TC-40": "pass",
+              "TC-43": "fail",
+              "TC-51": "fail",
+              "TC-52": "partial",
+              "TC-53": "pass",
+              "TC-63": "pass",
+              "TC-64": "pass",
+              "TC-68": "fail"
+            },
+            "score": 56,
+            "trial": 3
+          }
+        ]
+      }
+    },
+    {
+      "agentic_common": {
+        "n_repetitions": 3,
+        "n_ticket_runs": 24,
+        "outcomes": {
+          "partial": 12,
+          "success": 12
+        },
+        "repetitions": [
+          {
+            "outcomes": {
+              "partial": 3,
+              "success": 5
+            },
+            "repetition": 1,
+            "tickets": [
+              {
+                "input_tokens": 7589,
+                "outcome": "success",
+                "output_tokens": 302,
+                "ticket": "repo-map",
+                "verified_success": true,
+                "wall_time_s": 18.298022429007688
+              },
+              {
+                "input_tokens": 12849,
+                "outcome": "success",
+                "output_tokens": 1016,
+                "ticket": "retry-policy",
+                "verified_success": true,
+                "wall_time_s": 39.97183328100073
+              },
+              {
+                "input_tokens": 8350,
+                "outcome": "partial",
+                "output_tokens": 568,
+                "ticket": "route-export",
+                "verified_success": false,
+                "wall_time_s": 25.746731777995592
+              },
+              {
+                "input_tokens": 7629,
+                "outcome": "partial",
+                "output_tokens": 721,
+                "ticket": "dedupe-latest",
+                "verified_success": false,
+                "wall_time_s": 27.160243152990006
+              },
+              {
+                "input_tokens": 16073,
+                "outcome": "success",
+                "output_tokens": 1363,
+                "ticket": "safe-relative-path",
+                "verified_success": true,
+                "wall_time_s": 51.602919021999696
+              },
+              {
+                "input_tokens": 7254,
+                "outcome": "success",
+                "output_tokens": 931,
+                "ticket": "webhook-hmac",
+                "verified_success": true,
+                "wall_time_s": 32.816211718003615
+              },
+              {
+                "input_tokens": 5433,
+                "outcome": "success",
+                "output_tokens": 1053,
+                "ticket": "config-deep-merge",
+                "verified_success": true,
+                "wall_time_s": 31.4259238109953
+              },
+              {
+                "input_tokens": 7932,
+                "outcome": "partial",
+                "output_tokens": 866,
+                "ticket": "batch-recovery",
+                "verified_success": false,
+                "wall_time_s": 30.029673837998416
+              }
+            ]
+          },
+          {
+            "outcomes": {
+              "partial": 4,
+              "success": 4
+            },
+            "repetition": 2,
+            "tickets": [
+              {
+                "input_tokens": 5415,
+                "outcome": "success",
+                "output_tokens": 250,
+                "ticket": "repo-map",
+                "verified_success": true,
+                "wall_time_s": 14.653672405998805
+              },
+              {
+                "input_tokens": 12948,
+                "outcome": "success",
+                "output_tokens": 1059,
+                "ticket": "retry-policy",
+                "verified_success": true,
+                "wall_time_s": 41.64963149599498
+              },
+              {
+                "input_tokens": 8161,
+                "outcome": "partial",
+                "output_tokens": 517,
+                "ticket": "route-export",
+                "verified_success": false,
+                "wall_time_s": 25.465821329999017
+              },
+              {
+                "input_tokens": 12762,
+                "outcome": "partial",
+                "output_tokens": 1235,
+                "ticket": "dedupe-latest",
+                "verified_success": false,
+                "wall_time_s": 41.92379226299818
+              },
+              {
+                "input_tokens": 19921,
+                "outcome": "success",
+                "output_tokens": 1458,
+                "ticket": "safe-relative-path",
+                "verified_success": true,
+                "wall_time_s": 55.5790709869907
+              },
+              {
+                "input_tokens": 7194,
+                "outcome": "success",
+                "output_tokens": 914,
+                "ticket": "webhook-hmac",
+                "verified_success": true,
+                "wall_time_s": 31.737946741995984
+              },
+              {
+                "input_tokens": 7861,
+                "outcome": "partial",
+                "output_tokens": 1053,
+                "ticket": "config-deep-merge",
+                "verified_success": false,
+                "wall_time_s": 35.00177072700171
+              },
+              {
+                "input_tokens": 7958,
+                "outcome": "partial",
+                "output_tokens": 893,
+                "ticket": "batch-recovery",
+                "verified_success": false,
+                "wall_time_s": 30.989817100999062
+              }
+            ]
+          },
+          {
+            "outcomes": {
+              "partial": 5,
+              "success": 3
+            },
+            "repetition": 3,
+            "tickets": [
+              {
+                "input_tokens": 7589,
+                "outcome": "success",
+                "output_tokens": 294,
+                "ticket": "repo-map",
+                "verified_success": true,
+                "wall_time_s": 18.093152126006316
+              },
+              {
+                "input_tokens": 12907,
+                "outcome": "success",
+                "output_tokens": 1033,
+                "ticket": "retry-policy",
+                "verified_success": true,
+                "wall_time_s": 41.60042123499443
+              },
+              {
+                "input_tokens": 8060,
+                "outcome": "partial",
+                "output_tokens": 442,
+                "ticket": "route-export",
+                "verified_success": false,
+                "wall_time_s": 22.153159968002
+              },
+              {
+                "input_tokens": 7717,
+                "outcome": "partial",
+                "output_tokens": 726,
+                "ticket": "dedupe-latest",
+                "verified_success": false,
+                "wall_time_s": 27.43218852499558
+              },
+              {
+                "input_tokens": 8071,
+                "outcome": "partial",
+                "output_tokens": 831,
+                "ticket": "safe-relative-path",
+                "verified_success": false,
+                "wall_time_s": 34.5823917020025
+              },
+              {
+                "input_tokens": 10147,
+                "outcome": "success",
+                "output_tokens": 1599,
+                "ticket": "webhook-hmac",
+                "verified_success": true,
+                "wall_time_s": 49.44115511699056
+              },
+              {
+                "input_tokens": 7723,
+                "outcome": "partial",
+                "output_tokens": 1005,
+                "ticket": "config-deep-merge",
+                "verified_success": false,
+                "wall_time_s": 35.10408088499389
+              },
+              {
+                "input_tokens": 7793,
+                "outcome": "partial",
+                "output_tokens": 805,
+                "ticket": "batch-recovery",
+                "verified_success": false,
+                "wall_time_s": 29.391867949001607
+              }
+            ]
+          }
+        ],
+        "success_rate": 0.5,
+        "ticket_counts": {
+          "batch-recovery": {
+            "partial": 3
+          },
+          "config-deep-merge": {
+            "partial": 2,
+            "success": 1
+          },
+          "dedupe-latest": {
+            "partial": 3
+          },
+          "repo-map": {
+            "success": 3
+          },
+          "retry-policy": {
+            "success": 3
+          },
+          "route-export": {
+            "partial": 3
+          },
+          "safe-relative-path": {
+            "partial": 1,
+            "success": 2
+          },
+          "webhook-hmac": {
+            "success": 3
+          }
+        },
+        "wall_time_s_median": 31.581935276495642
+      },
+      "agentic_long": {
+        "n_repetitions": 3,
+        "n_ticket_runs": 6,
+        "outcomes": {
+          "partial": 6
+        },
+        "repetitions": [
+          {
+            "outcomes": {
+              "partial": 2
+            },
+            "repetition": 1,
+            "tickets": [
+              {
+                "input_tokens": 137884,
+                "outcome": "partial",
+                "output_tokens": 4621,
+                "ticket": "reliability-refactor-marathon",
+                "verified_success": false,
+                "wall_time_s": 203.1956992639898
+              },
+              {
+                "input_tokens": 91680,
+                "outcome": "partial",
+                "output_tokens": 5711,
+                "ticket": "security-recovery-marathon",
+                "verified_success": false,
+                "wall_time_s": 191.92859202300315
+              }
+            ]
+          },
+          {
+            "outcomes": {
+              "partial": 2
+            },
+            "repetition": 2,
+            "tickets": [
+              {
+                "input_tokens": 157177,
+                "outcome": "partial",
+                "output_tokens": 6212,
+                "ticket": "reliability-refactor-marathon",
+                "verified_success": false,
+                "wall_time_s": 243.47454653399473
+              },
+              {
+                "input_tokens": 114748,
+                "outcome": "partial",
+                "output_tokens": 7814,
+                "ticket": "security-recovery-marathon",
+                "verified_success": false,
+                "wall_time_s": 268.57558762699773
+              }
+            ]
+          },
+          {
+            "outcomes": {
+              "partial": 2
+            },
+            "repetition": 3,
+            "tickets": [
+              {
+                "input_tokens": 203160,
+                "outcome": "partial",
+                "output_tokens": 6224,
+                "ticket": "reliability-refactor-marathon",
+                "verified_success": false,
+                "wall_time_s": 263.8888450670056
+              },
+              {
+                "input_tokens": 86437,
+                "outcome": "partial",
+                "output_tokens": 6962,
+                "ticket": "security-recovery-marathon",
+                "verified_success": false,
+                "wall_time_s": 232.95917907000694
+              }
+            ]
+          }
+        ],
+        "success_rate": 0.0,
+        "ticket_counts": {
+          "reliability-refactor-marathon": {
+            "partial": 3
+          },
+          "security-recovery-marathon": {
+            "partial": 3
+          }
+        },
+        "wall_time_s_median": 238.21686280200083
+      },
+      "depth": {
+        "by_size": [
+          {
+            "checks_correct": 15,
+            "checks_total": 15,
+            "decode_tps_median": 52.71298256629117,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 3,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 1454.5698310329406,
+            "prompt_tokens_max": 8230,
+            "prompt_tokens_median": 8230,
+            "prompt_tokens_min": 8229,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 7127,
+            "ttft_s_median": 5.658030178004992
+          },
+          {
+            "checks_correct": 14,
+            "checks_total": 15,
+            "decode_tps_median": 48.27936218552333,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 2,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 1486.3842183974964,
+            "prompt_tokens_max": 32830,
+            "prompt_tokens_median": 32830,
+            "prompt_tokens_min": 32829,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 26779,
+            "ttft_s_median": 22.086483153994777
+          },
+          {
+            "checks_correct": 15,
+            "checks_total": 15,
+            "decode_tps_median": 42.434854291363834,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 3,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 1535.640295321741,
+            "prompt_tokens_max": 65580,
+            "prompt_tokens_median": 65580,
+            "prompt_tokens_min": 65579,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 52985,
+            "ttft_s_median": 42.70531334700354
+          },
+          {
+            "checks_correct": 14,
+            "checks_total": 15,
+            "decode_tps_median": 41.280746414007425,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 2,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 1521.1688672388134,
+            "prompt_tokens_max": 131130,
+            "prompt_tokens_median": 131130,
+            "prompt_tokens_min": 131129,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 105411,
+            "ttft_s_median": 86.20344711499638
+          },
+          {
+            "checks_correct": 14,
+            "checks_total": 15,
+            "decode_tps_median": 41.589300235769734,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 2,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 1517.7768633495573,
+            "prompt_tokens_max": 196630,
+            "prompt_tokens_median": 196630,
+            "prompt_tokens_min": 196629,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 157829,
+            "ttft_s_median": 129.55066370300483
+          },
+          {
+            "checks_correct": 13,
+            "checks_total": 15,
+            "decode_tps_median": 37.14453650839645,
+            "errors": 0,
+            "field_passes": {
+              "code_result": 1,
+              "latest_owner": 3,
+              "latest_status": 3,
+              "multi_needle": 3,
+              "single_needle": 3
+            },
+            "n": 3,
+            "prefill_tps_median": 1505.2920990733946,
+            "prompt_tokens_max": 259974,
+            "prompt_tokens_median": 259974,
+            "prompt_tokens_min": 259973,
+            "retrieval_correct": 12,
+            "retrieval_total": 12,
+            "target_tokens_approx": 208500,
+            "ttft_s_median": 172.70601510499546
+          }
+        ],
+        "seeds": [
+          {
+            "cases": [
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 52.71298256629117,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1118.213873234893,
+                "prompt_tokens": 8230,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 7127,
+                "ttft_s": 7.359951613005251
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 48.061724134646525,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1562.871738197842,
+                "prompt_tokens": 32830,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 26779,
+                "ttft_s": 21.00620236300165
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 45.55956062984231,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1558.6061955247644,
+                "prompt_tokens": 65580,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 52985,
+                "ttft_s": 42.076054995995946
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 33.09487673648919,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1578.6622125152305,
+                "prompt_tokens": 131130,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 105411,
+                "ttft_s": 83.06400125399523
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 41.89338533286498,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1495.0638844916257,
+                "prompt_tokens": 196630,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 157829,
+                "ttft_s": 131.51946350898652
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 41.81801096688008,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1497.1642906696197,
+                "prompt_tokens": 259974,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 208500,
+                "ttft_s": 173.6442697839957
+              }
+            ],
+            "seed": 1
+          },
+          {
+            "cases": [
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 57.8054379776024,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1454.5698310329406,
+                "prompt_tokens": 8230,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 7127,
+                "ttft_s": 5.658030178004992
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 49.5056047318318,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1484.394724582183,
+                "prompt_tokens": 32830,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 26779,
+                "ttft_s": 22.11675874100183
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 40.86995747621496,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1535.640295321741,
+                "prompt_tokens": 65580,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 52985,
+                "ttft_s": 42.70531334700354
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 41.280746414007425,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1521.1688672388134,
+                "prompt_tokens": 131130,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 105411,
+                "ttft_s": 86.20344711499638
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 30.569674070588192,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1530.2501853998929,
+                "prompt_tokens": 196630,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 157829,
+                "ttft_s": 128.4953283299983
+              },
+              {
+                "checks_correct": 4,
+                "checks_total": 5,
+                "decode_tps": 37.14453650839645,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1508.9305885895653,
+                "prompt_tokens": 259974,
+                "quality_checks": {
+                  "code_result": false,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 208500,
+                "ttft_s": 172.290231217994
+              }
+            ],
+            "seed": 2
+          },
+          {
+            "cases": [
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 49.0470597713091,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1455.351958927873,
+                "prompt_tokens": 8229,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 7127,
+                "ttft_s": 5.654302349008503
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 48.27936218552333,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1486.3842183974964,
+                "prompt_tokens": 32829,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 26779,
+                "ttft_s": 22.086483153994777
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 42.434854291363834,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1529.5531733466735,
+                "prompt_tokens": 65579,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 52985,
+                "ttft_s": 42.87461275799433
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 43.888161774514195,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1517.9152035782909,
+                "prompt_tokens": 131129,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 105411,
+                "ttft_s": 86.38756611099234
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 41.589300235769734,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1517.7768633495573,
+                "prompt_tokens": 196629,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 157829,
+                "ttft_s": 129.55066370300483
+              },
+              {
+                "checks_correct": 5,
+                "checks_total": 5,
+                "decode_tps": 36.600312308637896,
+                "error": null,
+                "finish_reason": "stop",
+                "prefill_tps": 1505.2920990733946,
+                "prompt_tokens": 259973,
+                "quality_checks": {
+                  "code_result": true,
+                  "latest_owner": true,
+                  "latest_status": true,
+                  "multi_needle": true,
+                  "single_needle": true
+                },
+                "target_tokens_approx": 208500,
+                "ttft_s": 172.70601510499546
+              }
+            ],
+            "seed": 3
+          }
+        ]
+      },
+      "id": "mia-exl3-ablit-r02-tp2",
+      "label": "Mia EXL3 + transplant R0.2 TP2",
+      "tool_eval": {
+        "n": 3,
+        "scenario_counts": {
+          "TC-40": {
+            "pass": 3
+          },
+          "TC-43": {
+            "fail": 3
+          },
+          "TC-51": {
+            "pass": 3
+          },
+          "TC-52": {
+            "partial": 2,
+            "pass": 1
+          },
+          "TC-53": {
+            "pass": 3
+          },
+          "TC-63": {
+            "pass": 3
+          },
+          "TC-64": {
+            "pass": 3
+          },
+          "TC-68": {
+            "fail": 3
+          }
+        },
+        "score_max": 75,
+        "score_mean": 71.0,
+        "score_median": 69,
+        "score_min": 69,
+        "scores": [
+          69,
+          75,
+          69
+        ],
+        "trials": [
+          {
+            "scenarios": {
+              "TC-40": "pass",
+              "TC-43": "fail",
+              "TC-51": "pass",
+              "TC-52": "partial",
+              "TC-53": "pass",
+              "TC-63": "pass",
+              "TC-64": "pass",
+              "TC-68": "fail"
+            },
+            "score": 69,
+            "trial": 1
+          },
+          {
+            "scenarios": {
+              "TC-40": "pass",
+              "TC-43": "fail",
+              "TC-51": "pass",
+              "TC-52": "pass",
+              "TC-53": "pass",
+              "TC-63": "pass",
+              "TC-64": "pass",
+              "TC-68": "fail"
+            },
+            "score": 75,
+            "trial": 2
+          },
+          {
+            "scenarios": {
+              "TC-40": "pass",
+              "TC-43": "fail",
+              "TC-51": "pass",
+              "TC-52": "partial",
+              "TC-53": "pass",
+              "TC-63": "pass",
+              "TC-64": "pass",
+              "TC-68": "fail"
+            },
+            "score": 69,
+            "trial": 3
+          }
+        ]
+      }
+    }
+  ]
+}
