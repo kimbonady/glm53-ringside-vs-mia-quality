@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Paired quality benchmark of GLM-5.3 Flash on RiNGSiDE NVFP4 TP4 and Mia EXL3 TP2 serving systems.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>GLM-5.3 Flash — RiNGSiDE vs Mia EXL3 quality A/B</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #08121b;
+      --panel: #101e29;
+      --panel-2: #142633;
+      --text: #ecf7f5;
+      --muted: #9bb2b4;
+      --line: #27404c;
+      --ring: #44e0b1;
+      --mia: #77a8ff;
+      --r02: #c790ff;
+      --warn: #ffcc75;
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(68,224,177,.13), transparent 32rem),
+        radial-gradient(circle at 88% 10%, rgba(119,168,255,.12), transparent 32rem),
+        var(--bg);
+      color: var(--text);
+      font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: #9cc2ff; }
+    a:hover { color: #c4d8ff; }
+    .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
+    header { padding: 72px 0 40px; }
+    .eyebrow { color: var(--ring); font-weight: 700; letter-spacing: .11em; text-transform: uppercase; font-size: .78rem; }
+    h1 { max-width: 920px; margin: 12px 0 20px; font-size: clamp(2.25rem, 6vw, 4.75rem); line-height: 1.02; letter-spacing: -.045em; }
+    .lede { max-width: 820px; color: #c7d9d9; font-size: clamp(1.05rem, 2vw, 1.35rem); }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .chip { border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; color: var(--muted); background: rgba(16,30,41,.7); }
+    main { padding-bottom: 72px; }
+    section { margin-top: 28px; }
+    .panel { background: linear-gradient(145deg, rgba(20,38,51,.96), rgba(14,29,40,.96)); border: 1px solid var(--line); border-radius: 20px; padding: clamp(22px, 4vw, 38px); box-shadow: 0 16px 52px rgba(0,0,0,.18); }
+    h2 { margin: 0 0 18px; font-size: clamp(1.45rem, 3vw, 2.15rem); letter-spacing: -.025em; }
+    h3 { margin: 0 0 6px; font-size: 1rem; }
+    p { margin: 8px 0 0; }
+    .muted { color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .stat { background: rgba(8,18,27,.55); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+    .stat strong { display: block; margin: 5px 0 3px; font-size: 2rem; line-height: 1; }
+    .ring strong { color: var(--ring); }
+    .mia strong { color: var(--mia); }
+    .r02 strong { color: var(--r02); }
+    .bars { display: grid; gap: 14px; margin-top: 24px; }
+    .bar-row { display: grid; grid-template-columns: minmax(190px, 1fr) 3fr 72px; gap: 14px; align-items: center; }
+    .track { height: 13px; border-radius: 99px; background: #071018; overflow: hidden; border: 1px solid #1f3742; }
+    .fill { height: 100%; border-radius: inherit; }
+    .fill.ring { background: var(--ring); }
+    .fill.mia { background: var(--mia); }
+    .fill.r02 { background: var(--r02); }
+    .callout { border-left: 4px solid var(--warn); padding: 5px 0 5px 18px; color: #f3dfb6; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .finding { border-top: 1px solid var(--line); padding-top: 18px; }
+    .finding:first-child { border-top: 0; padding-top: 0; }
+    .finding b { color: var(--text); }
+    table { width: 100%; border-collapse: collapse; margin-top: 18px; font-variant-numeric: tabular-nums; }
+    th, td { padding: 12px 10px; text-align: right; border-bottom: 1px solid var(--line); }
+    th:first-child, td:first-child { text-align: left; }
+    th { color: var(--muted); font-size: .85rem; }
+    .scroll { overflow-x: auto; }
+    .links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+    .button { display: inline-block; border: 1px solid var(--line); border-radius: 10px; padding: 9px 14px; text-decoration: none; background: #132836; }
+    .button.primary { background: var(--ring); color: #06231a; border-color: var(--ring); font-weight: 700; }
+    footer { border-top: 1px solid var(--line); color: var(--muted); padding: 30px 0 50px; }
+    code { color: #d6c5ff; }
+    @media (max-width: 760px) {
+      header { padding-top: 45px; }
+      .grid, .two { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 1fr 60px; }
+      .bar-row .track { grid-column: 1 / -1; grid-row: 2; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="eyebrow">Independent community evaluation · 30 September–1 October 2026</div>
+    <h1>GLM-5.3 Flash quality under two DGX Spark recipes</h1>
+    <p class="lede">A paired, three-repeat comparison of four-node RiNGSiDE NVFP4 TP4 against two-node Mia EXL3 TP2—focused on long-context retrieval, code reasoning, tools, and agentic tasks.</p>
+    <div class="chips">
+      <span class="chip">Prompts up to ~260K tokens</span>
+      <span class="chip">All repeats retained</span>
+      <span class="chip">External validators</span>
+      <span class="chip">No blended speed/quality score</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <h2>The short version</h2>
+      <div class="grid">
+        <article class="stat ring">
+          <h3>RiNGSiDE NVFP4 TP4</h3>
+          <strong>79/90</strong>
+          <span class="muted">depth checks · 16/24 agentic</span>
+        </article>
+        <article class="stat mia">
+          <h3>Mia EXL3 stock TP2</h3>
+          <strong>85/90</strong>
+          <span class="muted">depth checks · 13/24 agentic</span>
+        </article>
+        <article class="stat r02">
+          <h3>Mia EXL3 + R0.2 TP2</h3>
+          <strong>85/90</strong>
+          <span class="muted">depth checks · 12/24 agentic</span>
+        </article>
+      </div>
+      <div class="bars" aria-label="Depth quality scores">
+        <div class="bar-row"><span>RiNGSiDE</span><div class="track"><div class="fill ring" style="width:87.8%"></div></div><b>87.8%</b></div>
+        <div class="bar-row"><span>Mia stock</span><div class="track"><div class="fill mia" style="width:94.4%"></div></div><b>94.4%</b></div>
+        <div class="bar-row"><span>Mia + R0.2</span><div class="track"><div class="fill r02" style="width:94.4%"></div></div><b>94.4%</b></div>
+      </div>
+      <p class="callout"><b>The six-check gap is not retrieval.</b> Every system scored 72/72 on retrieval. It comes entirely from a synthetic composite code-reasoning check: 7/18 for RiNGSiDE and 13/18 for each EXL3 variant. A follow-up A/A showed enough item-level variance that this must remain a signal, not a causal quantization claim.</p>
+    </section>
+
+    <section class="two">
+      <article class="panel">
+        <h2>What held up</h2>
+        <div class="finding"><b>Long-context retrieval</b><p class="muted">Perfect across all six sizes, including ~260K real prompt tokens, for all three serving systems.</p></div>
+        <div class="finding"><b>Bounded agentic tasks</b><p class="muted">RiNGSiDE led the common track at 16/24 verified successes, versus 13/24 and 12/24.</p></div>
+        <div class="finding"><b>Ordinary tool selection</b><p class="muted">Domain selection, conditional planning, accumulated constraints, and simple schema compliance were stable.</p></div>
+      </article>
+      <article class="panel">
+        <h2>What stayed fragile</h2>
+        <div class="finding"><b>Composite code reasoning at depth</b><p class="muted">RiNGSiDE showed a repeatable local weakness even though it retrieved the required facts.</p></div>
+        <div class="finding"><b>Adversarial tool constraints</b><p class="muted">All variants failed missing-required-argument and strict schema-resistance tests.</p></div>
+        <div class="finding"><b>Long horizon</b><p class="muted">Every system ended partial on all six runs. This protocol did not separate the recipes.</p></div>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2>Quality by prompt depth</h2>
+      <p class="muted">Correct checks out of 15 across three seeds. Twelve checks are retrieval and three are composite code reasoning.</p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Real prompt</th><th>RiNGSiDE</th><th>Mia stock</th><th>Mia + R0.2</th></tr></thead>
+          <tbody>
+            <tr><td>~8K</td><td>15/15</td><td>14/15</td><td>15/15</td></tr>
+            <tr><td>~33K</td><td>13/15</td><td>15/15</td><td>14/15</td></tr>
+            <tr><td>~66K</td><td>14/15</td><td>15/15</td><td>15/15</td></tr>
+            <tr><td>~131K</td><td>12/15</td><td>14/15</td><td>14/15</td></tr>
+            <tr><td>~197K</td><td>13/15</td><td>14/15</td><td>14/15</td></tr>
+            <tr><td>~260K</td><td>12/15</td><td>13/15</td><td>13/15</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Interpretation without overclaiming</h2>
+      <p>RiNGSiDE preserved retrieval and performed strongly on the bounded agentic track. The negative signal is specific: mental execution or composition of distant code facts. That is worth documenting, but it does not support a blanket statement that NVFP4 degrades GLM-5.3 Flash quality.</p>
+      <p>The systems also differ in node count, tensor parallelism, serving runtime, speculative drafter, parser behavior, and context configuration. These are complete-system results—not a pure NVFP4-versus-EXL3 experiment.</p>
+      <p class="muted">Scope note: the tested Mia system is the pinned EXL3 vLLM recipe, not the newer TensorFold recipe.</p>
+    </section>
+
+    <section class="panel">
+      <h2>RiNGSiDE+ follow-up</h2>
+      <p class="muted">A strengthened 54-check gate measured same-system variance before three one-change-at-a-time runtime precision ablations.</p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>RiNGSiDE configuration</th><th>Composite gate</th><th>Retrieval sentry</th><th>Decision</th></tr></thead>
+          <tbody>
+            <tr><td>Production baseline · repeat 1</td><td>31/54</td><td>53/54</td><td>reference</td></tr>
+            <tr><td>Production baseline · repeat 2</td><td>29/54</td><td>54/54</td><td>reference</td></tr>
+            <tr><td>Target KV BF16</td><td>25/54</td><td>52/54</td><td>rejected</td></tr>
+            <tr><td>Greedy verification disabled</td><td>25/54</td><td>50/54</td><td>rejected</td></tr>
+            <tr><td>KDA recurrent state FP32</td><td>26/54</td><td>54/54</td><td>rejected</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="callout"><b>Result:</b> about 22% of controls flipped between same-system repetitions, and none of the precision changes improved the gate. KV FP8, KDA-state precision, and the verification path did not explain the original gap. Checkpoint quantization remains a hypothesis, not a demonstrated cause.</p>
+      <p>The unchanged production stack then completed a two-hour, 2,550-request mixed soak with zero request errors, empty/corrupted outputs, transport losses, or lasting sentinel degradation.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Data and provenance</h2>
+      <div class="links">
+        <a class="button primary" href="data/results.json">Download structured results</a>
+        <a class="button" href="RESULTS.md">Detailed tables</a>
+        <a class="button" href="METHODOLOGY.md">Methodology</a>
+        <a class="button" href="https://github.com/othexmr/GLM-5.3-Flash-NVFP4-2x-4x-DGX-Sparks-RiNGSiDE">RiNGSiDE recipe</a>
+        <a class="button" href="https://github.com/MiaAI-Lab/GLM-5.3-Flash-EXL3-2x-DGX-Sparks">Mia EXL3 recipe</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">All fresh repetitions are published; no best-run selection. Derived results only—no prompts, responses, transcripts, diffs, or operational identifiers. Released under the MIT License.</div>
+  </footer>
+</body>
+</html>
