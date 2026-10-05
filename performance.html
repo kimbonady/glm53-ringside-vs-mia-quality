@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Independent performance qualification of GLM-5.3 Flash NVFP4 RiNGSiDE TP4 on four NVIDIA DGX Spark systems.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>GLM-5.3 Flash RiNGSiDE TP4 — performance qualification</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg:#071017; --panel:#0e1c25; --panel2:#122733; --text:#ecf8f5;
+      --muted:#9cb4b6; --line:#29434d; --green:#45e0b2; --cyan:#59c9ff;
+      --purple:#bd94ff; --orange:#ffbd73; --red:#ff8888; --max:1160px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(circle at 15% -5%,rgba(69,224,178,.15),transparent 34rem),radial-gradient(circle at 92% 12%,rgba(89,201,255,.12),transparent 31rem),var(--bg);color:var(--text);font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    a{color:#9ed8ff} a:hover{color:#d2efff}
+    .wrap{width:min(calc(100% - 32px),var(--max));margin:auto}
+    nav{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:22px 0;color:var(--muted)}
+    nav .links{display:flex;gap:10px;flex-wrap:wrap}
+    nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 11px;background:rgba(14,28,37,.7)}
+    header{padding:50px 0 38px}
+    .eyebrow{color:var(--green);font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.76rem}
+    h1{max-width:980px;margin:12px 0 20px;font-size:clamp(2.5rem,6vw,5rem);line-height:1;letter-spacing:-.05em}
+    .lede{max-width:870px;color:#c8dcda;font-size:clamp(1.08rem,2vw,1.35rem)}
+    .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px}.chip{border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:var(--muted);background:rgba(14,28,37,.78)}
+    main{padding-bottom:70px} section{margin-top:25px}
+    .panel{background:linear-gradient(145deg,rgba(18,39,51,.97),rgba(11,25,34,.97));border:1px solid var(--line);border-radius:20px;padding:clamp(22px,4vw,38px);box-shadow:0 18px 60px rgba(0,0,0,.18)}
+    h2{margin:0 0 12px;font-size:clamp(1.55rem,3vw,2.25rem);letter-spacing:-.03em} h3{margin:0 0 5px;font-size:1rem} p{margin:8px 0 0}.muted{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}.stat{background:rgba(6,17,24,.6);border:1px solid var(--line);border-radius:15px;padding:17px}.stat strong{display:block;font-size:1.8rem;line-height:1.05;color:var(--green);margin-top:5px}.stat small{color:var(--muted)}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .bars{display:grid;gap:12px;margin-top:20px}.bar{display:grid;grid-template-columns:minmax(145px,1fr) 4fr 80px;gap:12px;align-items:center}.track{height:12px;background:#061018;border:1px solid #203943;border-radius:99px;overflow:hidden}.fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--green),var(--cyan))}
+    table{width:100%;border-collapse:collapse;margin-top:18px;font-variant-numeric:tabular-nums}th,td{padding:11px 9px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}th:first-child,td:first-child{text-align:left}th{color:var(--muted);font-size:.82rem}.scroll{overflow-x:auto}
+    .callout{border-left:4px solid var(--orange);padding:7px 0 7px 18px;color:#f3e0be;margin-top:20px}.good{border-left-color:var(--green);color:#c8f5e6}.warn{color:var(--orange)}
+    .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.fact{border-top:1px solid var(--line);padding-top:15px}.fact b{color:var(--green)}
+    .buttons{display:flex;gap:11px;flex-wrap:wrap;margin-top:20px}.button{display:inline-block;text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:9px 14px;background:#122a38}.button.primary{background:var(--green);border-color:var(--green);color:#06231a;font-weight:800}
+    footer{border-top:1px solid var(--line);padding:30px 0 48px;color:var(--muted)}
+    @media(max-width:880px){.grid{grid-template-columns:repeat(2,1fr)}.facts{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
+    @media(max-width:620px){nav{align-items:flex-start;flex-direction:column}header{padding-top:28px}.grid{grid-template-columns:1fr}.bar{grid-template-columns:1fr 65px}.bar .track{grid-column:1/-1;grid-row:2}}
+  </style>
+</head>
+<body>
+  <nav class="wrap">
+    <strong>GLM-5.3 community evaluation</strong>
+    <div class="links"><a href="index.html">Quality A/B</a><a href="#data">Data</a><a href="https://github.com/kimbonady/glm53-ringside-vs-mia-quality">GitHub</a></div>
+  </nav>
+  <header class="wrap">
+    <div class="eyebrow">Independent performance qualification · September–October 2026</div>
+    <h1>What four-node RiNGSiDE TP4 actually delivers</h1>
+    <p class="lede">Fresh, repeated measurements of GLM-5.3 Flash NVFP4: decode by content, cold prefill to ~260K, prefix reuse, C1–C16 scaling, large-prefill interference and endurance.</p>
+    <div class="chips"><span class="chip">4× NVIDIA DGX Spark</span><span class="chip">TP=4 switchless ring</span><span class="chip">DFlash2 K7</span><span class="chip">262,144-token window</span><span class="chip">2,200 MHz cap</span></div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <h2>Measured headline</h2>
+      <div class="grid">
+        <article class="stat"><small>Code · C1 · 2K budget</small><strong>99.7</strong><small>tokens/s</small></article>
+        <article class="stat"><small>Cold prefill · 64K</small><strong>4,993</strong><small>tokens/s</small></article>
+        <article class="stat"><small>Code · C16 aggregate</small><strong>439.8</strong><small>tokens/s</small></article>
+        <article class="stat"><small>Shared prefix · ~260K</small><strong>44.5×</strong><small>TTFT speedup</small></article>
+        <article class="stat"><small>Mixed soak · 2 hours</small><strong>2,550</strong><small>requests · 0 errors</small></article>
+      </div>
+      <p class="callout good"><b>Reproduction came first.</b> The 23 initial baseline cells were repeated before expanding the matrix; maximum absolute drift across the full reproduction set was 2.56%.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Decode depends on content</h2>
+      <p class="muted">C1 means one active request. These are means of three fresh repetitions at the common 2,048-token budget after warmup; every row passed its task validator 3/3.</p>
+      <div class="bars" aria-label="Decode speed at 2048 tokens">
+        <div class="bar"><span>Code</span><div class="track"><div class="fill" style="width:100%"></div></div><b>99.7</b></div>
+        <div class="bar"><span>Reasoning</span><div class="track"><div class="fill" style="width:78.7%"></div></div><b>78.4</b></div>
+        <div class="bar"><span>French prose</span><div class="track"><div class="fill" style="width:73.2%"></div></div><b>72.9</b></div>
+        <div class="bar"><span>Structured</span><div class="track"><div class="fill" style="width:62.4%"></div></div><b>62.2</b></div>
+        <div class="bar"><span>English prose</span><div class="track"><div class="fill" style="width:61.9%"></div></div><b>61.7</b></div>
+        <div class="bar"><span>JSON</span><div class="track"><div class="fill" style="width:58.5%"></div></div><b>58.3</b></div>
+      </div>
+      <div class="scroll"><table><thead><tr><th>Content</th><th>Decode</th><th>TTFT</th><th>DFlash2 acceptance</th></tr></thead><tbody>
+        <tr><td>Code</td><td>99.666 tok/s</td><td>0.138 s</td><td>73.74%</td></tr>
+        <tr><td>Reasoning</td><td>78.412 tok/s</td><td>0.139 s</td><td>56.17%</td></tr>
+        <tr><td>French prose</td><td>72.947 tok/s</td><td>0.123 s</td><td>50.18%</td></tr>
+        <tr><td>English prose</td><td>61.659 tok/s</td><td>0.112 s</td><td>41.41%</td></tr>
+        <tr><td>Structured output</td><td>62.191 tok/s</td><td>0.145 s</td><td>42.61%</td></tr>
+        <tr><td>JSON</td><td>58.269 tok/s</td><td>0.150 s</td><td>37.44%</td></tr>
+      </tbody></table></div>
+      <p class="callout"><b>Budget matters.</b> The faster 128-token rows all ended by length and failed the task oracle. They remain valid speed measurements, but are not quality-qualified performance claims.</p>
+    </section>
+
+    <section class="two">
+      <article class="panel">
+        <h2>Cold prefill</h2>
+        <p class="muted">Unique early nonces; zero cache hits; n=3 at each size.</p>
+        <div class="scroll"><table><thead><tr><th>Real prompt</th><th>TTFT</th><th>Prefill</th></tr></thead><tbody>
+          <tr><td>569</td><td>0.308 s</td><td>1,845 tok/s</td></tr><tr><td>8,251</td><td>1.822 s</td><td>4,530 tok/s</td></tr><tr><td>32,827</td><td>6.627 s</td><td>4,953 tok/s</td></tr><tr><td>65,595</td><td>13.137 s</td><td>4,993 tok/s</td></tr><tr><td>131,131</td><td>26.486 s</td><td>4,951 tok/s</td></tr><tr><td>196,667</td><td>40.318 s</td><td>4,878 tok/s</td></tr><tr><td>260,155</td><td>54.234 s</td><td>4,797 tok/s</td></tr>
+        </tbody></table></div>
+        <p class="muted">The prefill plateau stays near 5K tok/s from 32K to 128K, then declines gradually.</p>
+      </article>
+      <article class="panel">
+        <h2>Prefix reuse</h2>
+        <p class="muted">105 valid requests across cold, replay, shared, append-only and early-mutation conditions.</p>
+        <div class="scroll"><table><thead><tr><th>Context</th><th>Cold</th><th>Shared prefix</th><th>Speedup</th></tr></thead><tbody>
+          <tr><td>8K</td><td>1.830 s</td><td>0.471 s</td><td>3.88×</td></tr><tr><td>32K</td><td>6.698 s</td><td>0.617 s</td><td>10.86×</td></tr><tr><td>64K</td><td>13.216 s</td><td>0.805 s</td><td>16.41×</td></tr><tr><td>128K</td><td>26.556 s</td><td>0.922 s</td><td>28.80×</td></tr><tr><td>192K</td><td>40.412 s</td><td>1.065 s</td><td>37.94×</td></tr><tr><td>~260K</td><td>54.439 s</td><td>1.224 s</td><td>44.48×</td></tr>
+        </tbody></table></div>
+        <p class="callout"><b>Not generic warmup:</b> changing one token near the start removed the cache hit at every depth.</p>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2>C1 to C16 scaling</h2>
+      <p class="muted">Short 300-token outputs. Aggregate throughput rises through C16; per-stream speed declines as more requests share the engine.</p>
+      <div class="scroll"><table><thead><tr><th>Profile</th><th>C1 aggregate</th><th>C8 aggregate</th><th>C16 aggregate</th><th>C16 / stream</th><th>C16 TTFT p95</th><th>Fairness</th></tr></thead><tbody>
+        <tr><td>Code</td><td>93.55</td><td>279.12</td><td>439.75 tok/s</td><td>27.48</td><td>0.357 s</td><td>0.999</td></tr>
+        <tr><td>French prose</td><td>70.45</td><td>196.99</td><td>286.92 tok/s</td><td>17.93</td><td>0.340 s</td><td>0.999</td></tr>
+        <tr><td>JSON</td><td>90.24</td><td>202.69</td><td>308.60 tok/s</td><td>19.29</td><td>0.348 s</td><td>0.996</td></tr>
+        <tr><td>Mixed</td><td>91.23</td><td>155.10</td><td>220.03 tok/s</td><td>13.75</td><td>0.410 s</td><td>0.961</td></tr>
+      </tbody></table></div>
+      <div class="facts" style="margin-top:22px"><div class="fact"><b>16 running</b><br><span class="muted">exactly the requested C16 level</span></div><div class="fact"><b>0 waiting · 0 preemptions</b><br><span class="muted">in the instrumented mixed pass</span></div><div class="fact"><b>4.51% KV</b><br><span class="muted">maximum observed at C16</span></div></div>
+      <p class="callout good"><b>Operational reading:</b> C16 is the measured batch-throughput point. C8 is the more conservative interactive envelope because it preserves more per-stream speed and arrival headroom.</p>
+    </section>
+
+    <section class="panel">
+      <h2>A large prefill changes the latency story</h2>
+      <p class="muted">A 128K cold prefill collided with four short streams in three paired, randomized repetitions.</p>
+      <div class="scroll"><table><thead><tr><th>Arrival order</th><th>Small TTFT p95</th><th>Small aggregate decode</th><th>Long TTFT</th><th>Long prefill</th></tr></thead><tbody>
+        <tr><td>Large prefill first</td><td class="warn">+1,035.76%</td><td>-44.05%</td><td>+15.36%</td><td>-13.31%</td></tr>
+        <tr><td>Small streams already active</td><td>-0.68%</td><td>-44.97%</td><td>+17.55%</td><td>-14.93%</td></tr>
+      </tbody></table></div>
+      <p class="callout"><b>The scheduling lesson is concrete:</b> a large prefill arriving first blocks short requests' first token. If short streams already started, their TTFT survives, but their ongoing decode is still almost halved.</p>
+    </section>
+
+    <section class="two">
+      <article class="panel">
+        <h2>Against earlier measurements</h2>
+        <div class="fact"><b>GLM R0.2</b><p class="muted">2.80× on the strictly paired reasoning decode cell; 3.26× cold 32K prefill by matched intent; 68.2% lower 32K TTFT.</p></div>
+        <div class="fact"><b>Published RiNGSiDE cells</b><p class="muted">Fresh matched values landed 0.4–6.3% below the upstream figures, depending on the cell.</p></div>
+        <div class="fact"><b>DeepSeek historical systems</b><p class="muted">RiNGSiDE was 1.38–1.68× faster on decode and 2.63× on 32K prefill versus V4 0731; 2.19–3.15× on decode and 5.97× on 32K prefill versus V4.1 EXL3.</p></div>
+        <p class="callout">DeepSeek rows compare complete systems with different models, node counts, runtimes and harness revisions. They are descriptive context, not a model-only claim.</p>
+      </article>
+      <article class="panel">
+        <h2>Endurance follow-up</h2>
+        <div class="grid" style="grid-template-columns:repeat(2,1fr)"><article class="stat"><small>Duration</small><strong>2 h</strong></article><article class="stat"><small>Requests</small><strong>2,550</strong></article><article class="stat"><small>Request errors</small><strong>0</strong></article><article class="stat"><small>Transport losses</small><strong>0</strong></article></div>
+        <p>The unchanged production configuration also recorded zero empty outputs, zero replacement-character corruption, and no lasting sentinel degradation after a rest interval.</p>
+        <p class="muted">This later bounded soak complements earlier attempts affected by client-side transport availability; it does not erase those retained incidents.</p>
+      </article>
+    </section>
+
+    <section class="panel" id="data">
+      <h2>Data, checks and boundaries</h2>
+      <p>Every displayed value is measured or derived from sealed campaign aggregates. No best run was selected. RigMark, sparkDash and v15 cells remain separate; cold and cache-hit measurements are never blended; per-stream and aggregate throughput are both labeled.</p>
+      <div class="buttons"><a class="button primary" href="data/performance.json">Download performance data</a><a class="button" href="PERFORMANCE.md">Full tables</a><a class="button" href="scripts/verify_performance.py">Verification script</a><a class="button" href="index.html">Quality A/B</a><a class="button" href="https://github.com/othexmr/GLM-5.3-Flash-NVFP4-2x-4x-DGX-Sparks-RiNGSiDE">Upstream recipe</a></div>
+      <p class="muted">Public aggregates only: no raw prompts, responses, transcripts, logs, endpoints, hostnames, run identifiers, operator identifiers or private workload data.</p>
+    </section>
+  </main>
+  <footer><div class="wrap">Independent community evaluation. Complete-system results on a pinned four-node RiNGSiDE configuration; no blended speed/quality score.</div></footer>
+</body>
+</html>

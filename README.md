@@ -1,4 +1,13 @@
-# GLM-5.3 Flash quality A/B: RiNGSiDE NVFP4 TP4 vs Mia EXL3 TP2
+# GLM-5.3 Flash on DGX Spark: quality and performance
+
+This repository now contains two complementary public reports:
+
+- **[Quality A/B](https://kimbonady.github.io/glm53-ringside-vs-mia-quality/):** a paired comparison of RiNGSiDE NVFP4 TP4 and Mia EXL3 TP2 serving systems;
+- **[RiNGSiDE performance qualification](https://kimbonady.github.io/glm53-ringside-vs-mia-quality/performance.html):** decode, cold prefill, prefix-cache reuse, concurrency, interference, historical context, and endurance for the four-node RiNGSiDE configuration.
+
+The reports remain deliberately separate: speed and quality are not collapsed into one score.
+
+## Quality comparison
 
 This repository publishes a paired, three-repeat quality comparison of three GLM-5.3 Flash serving systems on NVIDIA DGX Spark:
 
@@ -56,14 +65,19 @@ All three fresh repetitions are included. No best run was selected. The structur
 
 - [`RESULTS.md`](RESULTS.md): full derived tables and interpretation;
 - [`METHODOLOGY.md`](METHODOLOGY.md): protocol, scoring, comparability, and limitations;
+- [`PERFORMANCE.md`](PERFORMANCE.md): detailed RiNGSiDE performance report and operational interpretation;
 - [`data/results.json`](data/results.json): allow-listed structured results and RiNGSiDE+ follow-up;
+- [`data/performance.json`](data/performance.json): allow-listed structured performance measurements;
 - [`scripts/verify.py`](scripts/verify.py): integrity and consistency checks;
-- [`index.html`](index.html): dependency-free public report page.
+- [`scripts/verify_performance.py`](scripts/verify_performance.py): performance-dataset checks;
+- [`index.html`](index.html): dependency-free quality report page;
+- [`performance.html`](performance.html): dependency-free performance report page.
 
 Verify the release with:
 
 ```bash
 python3 scripts/verify.py
+python3 scripts/verify_performance.py
 ```
 
 ## Data boundary
